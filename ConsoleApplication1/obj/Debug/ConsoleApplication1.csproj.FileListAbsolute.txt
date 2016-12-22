@@ -1,0 +1,8 @@
+D:\tmp\2\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+D:\tmp\2\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+D:\tmp\2\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+D:\tmp\2\ConsoleApplication1\ConsoleApplication1\bin\Debug\RestSharp.dll
+D:\tmp\2\ConsoleApplication1\ConsoleApplication1\bin\Debug\RestSharp.xml
+D:\tmp\2\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+D:\tmp\2\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+D:\tmp\2\ConsoleApplication1\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
