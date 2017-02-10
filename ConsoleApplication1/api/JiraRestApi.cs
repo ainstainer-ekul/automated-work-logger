@@ -53,19 +53,39 @@ namespace ConsoleApplication1
                 List<Worklog> worklogList = new List<Worklog>();
                 Worklog worklog;
 
-
-
                 
                 foreach (WorklogRootObject rootObject in worklogRootObjectList)
                 {
+
+                    Console.WriteLine("------");
                     worklog = new Worklog();
                     worklog.key = rootObject.issue.key;
                     worklog.timeSpentSeconds = rootObject.timeSpentSeconds;
+
+                    Console.WriteLine(rootObject.dateStarted + " " + rootObject.issue.key + " " + rootObject.timeSpentSeconds + "  " + rootObject.comment);
+
+
                     worklog.comment = rootObject.comment;
                     worklog.dateStarted = rootObject.dateStarted;
                     worklogList.Add(worklog);
+                    Console.WriteLine("------");
+
                 }
                 return worklogList;
+            }
+
+            public Dictionary<string, List<Worklog>> GetWorklogsListForPeriod(string startDate, string endDate )
+            {
+                Dictionary<string, List<Worklog>> resultLogsDictionary = new Dictionary<string, List<Worklog>>();
+
+                for (var date = Convert.ToDateTime(startDate); date <= Convert.ToDateTime(endDate); date = date.AddDays(1))
+                {
+                    string oneDay = string.Format("{0}-{1}-{2}", date.Year, date.Month, date.Day);
+                    resultLogsDictionary.Add(oneDay, GetWorklogsList(oneDay));
+                }
+
+
+                return resultLogsDictionary;
             }
 
             public int GetWorklogsSum(List<Worklog> worklogList) {
@@ -109,11 +129,17 @@ namespace ConsoleApplication1
                     Console.WriteLine(oneWorklog.key + "  "
                         + Utils.ConvertSecondsToWorklogFormat(oneWorklog.timeSpentSeconds));
 
-                    targetJiraRestApi.AddWorklog(targetTicket,
-                        oneWorklog.key,
-                        Utils.ConvertSecondsToWorklogFormat(oneWorklog.timeSpentSeconds),
-                        string.Format("{0}{1:zz}00", oneWorklog.dateStarted, DateTime.Now)                      
-                    );
+                    Console.WriteLine("|| targetTicket: " + targetTicket);
+                    Console.WriteLine("|| timeSpentSeconds: " + Utils.ConvertSecondsToWorklogFormat(oneWorklog.timeSpentSeconds));
+                    Console.WriteLine("|| dateStarted: " + string.Format("{0}{1:zz}00", oneWorklog.dateStarted, DateTime.Now));
+
+
+
+//                    targetJiraRestApi.AddWorklog(targetTicket,
+//                        oneWorklog.key,
+//                        Utils.ConvertSecondsToWorklogFormat(oneWorklog.timeSpentSeconds),
+//                        string.Format("{0}{1:zz}00", oneWorklog.dateStarted, DateTime.Now)                      
+//                    );
                 }
             }
         }

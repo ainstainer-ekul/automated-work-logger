@@ -27,27 +27,31 @@ namespace ConsoleApplication1
         
         static void Main(string[] args)
         {
-            Console.WriteLine("|| " + args[0]);
-
-
             restClientsInit();
             
             string line = "";
             List<Worklog> u4iWorklogsList;
             while (true) {
+                u4iJiraRestApi.GetWorklogsListForPeriod("2017-01-20", "2017-02-3");
+
                 Console.WriteLine("Enter 'exit' to exit");
                 Console.WriteLine("Enter the date in YYYY-MM-D format:");
                 line = Utils.GetConsoleValue();
                 if (Utils.IsDateFormatCorrect(line))
                 {
-                    u4iWorklogsList = u4iJiraRestApi.GetWorklogsList(line); 
+                    u4iWorklogsList = u4iJiraRestApi.GetWorklogsList(line);
 
-                    Console.WriteLine("Copying...");
-                    JiraRestApi.CopyWorkLogs(u4iWorklogsList, ainJiraRestApi, TARGET_TICKET);
 
-                    Console.WriteLine(" ");
-                    Console.WriteLine(String.Format("Copying successfully completed! (for '{0}' date)", line));
-                    Console.WriteLine(" ");
+
+
+
+
+//                    Console.WriteLine("Copying...");
+//                    JiraRestApi.CopyWorkLogs(u4iWorklogsList, ainJiraRestApi, TARGET_TICKET);
+//
+//                    Console.WriteLine(" ");
+//                    Console.WriteLine(String.Format("Copying successfully completed! (for '{0}' date)", line));
+//                    Console.WriteLine(" ");
                 }
                 else if(line.Equals("exit")){
                     break;
