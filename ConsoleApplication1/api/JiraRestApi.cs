@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConsoleApplication1
@@ -40,6 +41,7 @@ namespace ConsoleApplication1
                     var cookie = response.Cookies.FirstOrDefault();
                     cookiecon.Add(new Cookie(cookie.Name, cookie.Value, cookie.Path, cookie.Domain));
                 }
+
                 restClient.CookieContainer = cookiecon;
             }
 
@@ -53,23 +55,14 @@ namespace ConsoleApplication1
                 List<Worklog> worklogList = new List<Worklog>();
                 Worklog worklog;
 
-                
                 foreach (WorklogRootObject rootObject in worklogRootObjectList)
                 {
-
-                    Console.WriteLine("------");
                     worklog = new Worklog();
                     worklog.key = rootObject.issue.key;
                     worklog.timeSpentSeconds = rootObject.timeSpentSeconds;
-
-                    Console.WriteLine(rootObject.dateStarted + " " + rootObject.issue.key + " " + rootObject.timeSpentSeconds + "  " + rootObject.comment);
-
-
                     worklog.comment = rootObject.comment;
                     worklog.dateStarted = rootObject.dateStarted;
                     worklogList.Add(worklog);
-                    Console.WriteLine("------");
-
                 }
                 return worklogList;
             }
@@ -83,7 +76,6 @@ namespace ConsoleApplication1
                     string oneDay = string.Format("{0}-{1}-{2}", date.Year, date.Month, date.Day);
                     resultLogsDictionary.Add(oneDay, GetWorklogsList(oneDay));
                 }
-
 
                 return resultLogsDictionary;
             }
@@ -124,23 +116,23 @@ namespace ConsoleApplication1
             }
 
             public static void CopyWorkLogs(List<Worklog> worklogList, JiraRestApi targetJiraRestApi, string targetTicket) {
+                Console.WriteLine("***** Daily worklogs *****");
                 foreach (Worklog oneWorklog in worklogList) { 
                     Console.WriteLine("-----------");
-                    Console.WriteLine(oneWorklog.key + "  "
-                        + Utils.ConvertSecondsToWorklogFormat(oneWorklog.timeSpentSeconds));
+                    Console.WriteLine("| targetTicket: " + targetTicket);
+                    Console.WriteLine("| description: " + oneWorklog.key);
+                    Console.WriteLine("| timeSpentSeconds: " + Utils.ConvertSecondsToWorklogFormat(oneWorklog.timeSpentSeconds));
+                    Console.WriteLine("| dateStarted: " + string.Format("{0}{1:zz}00", oneWorklog.dateStarted, DateTime.Now));
 
-                    Console.WriteLine("|| targetTicket: " + targetTicket);
-                    Console.WriteLine("|| timeSpentSeconds: " + Utils.ConvertSecondsToWorklogFormat(oneWorklog.timeSpentSeconds));
-                    Console.WriteLine("|| dateStarted: " + string.Format("{0}{1:zz}00", oneWorklog.dateStarted, DateTime.Now));
+                    targetJiraRestApi.AddWorklog(targetTicket,
+                        oneWorklog.key,
+                        Utils.ConvertSecondsToWorklogFormat(oneWorklog.timeSpentSeconds),
+                        string.Format("{0}{1:zz}00", oneWorklog.dateStarted, DateTime.Now)                      
+                    );
 
-
-
-//                    targetJiraRestApi.AddWorklog(targetTicket,
-//                        oneWorklog.key,
-//                        Utils.ConvertSecondsToWorklogFormat(oneWorklog.timeSpentSeconds),
-//                        string.Format("{0}{1:zz}00", oneWorklog.dateStarted, DateTime.Now)                      
-//                    );
+                    Console.WriteLine("-----------");
                 }
+                Console.WriteLine("**************************");
             }
         }
     }

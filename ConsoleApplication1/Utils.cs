@@ -42,12 +42,13 @@ namespace ConsoleApplication1
             return Console.ReadLine();
         }
 
-        public static bool IsDateFormatCorrect(string date) {
-            string datePattern = @"([\d]{4}-[\d]{1,2}-[\d]{1,2})";
+        public static bool IsDateFormatCorrect(string dates) {
+            string datePattern = @"([\d]{4}-[\d]{1,2}-[\d]{1,2}:[\d]{4}-[\d]{1,2}-[\d]{1,2})";
             Regex r = new Regex(datePattern, RegexOptions.IgnoreCase);
-            if (r.Match(date).Success)
+            if (r.Match(dates).Success)
             {
-                return IsDateExists(date);
+                string[] dateItems = dates.Split(':');
+                return IsDateExists(dateItems[0]) & IsDateExists(dateItems[1]);
             }
             else {
                 return false;
@@ -65,6 +66,11 @@ namespace ConsoleApplication1
             else {
                 return false;
             }
+        }
+
+        public static int CompareTwoDates(string startDate, string endDate)
+        {
+            return DateTime.Compare(Convert.ToDateTime(startDate), Convert.ToDateTime(endDate));  
         }
     }
 }

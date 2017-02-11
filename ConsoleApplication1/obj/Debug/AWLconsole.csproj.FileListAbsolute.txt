@@ -5,7 +5,6 @@ D:\tmp\2\ConsoleApplication1\ConsoleApplication1\bin\Debug\AWLconsole.exe
 D:\tmp\2\ConsoleApplication1\ConsoleApplication1\bin\Debug\AWLconsole.pdb
 D:\tmp\2\ConsoleApplication1\ConsoleApplication1\obj\Debug\AWLconsole.exe
 D:\tmp\2\ConsoleApplication1\ConsoleApplication1\obj\Debug\AWLconsole.pdb
-D:\tmp\2\ConsoleApplication1\ConsoleApplication1\obj\Debug\AWLconsole.csprojResolveAssemblyReference.cache
 C:\Projects\1stOne\automated-work-logger\automated-work-logger\ConsoleApplication1\bin\Debug\AWLconsole.exe.config
 C:\Projects\1stOne\automated-work-logger\automated-work-logger\ConsoleApplication1\obj\Debug\AWLconsole.exe
 C:\Projects\1stOne\automated-work-logger\automated-work-logger\ConsoleApplication1\obj\Debug\AWLconsole.pdb
