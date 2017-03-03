@@ -120,12 +120,15 @@ namespace ConsoleApplication1
                 foreach (Worklog oneWorklog in worklogList) { 
                     Console.WriteLine("-----------");
                     Console.WriteLine("| targetTicket: " + targetTicket);
-                    Console.WriteLine("| description: " + oneWorklog.key);
+                    Console.WriteLine("| key: " + oneWorklog.key);
+                    Console.WriteLine("| comment: " + oneWorklog.comment);
                     Console.WriteLine("| timeSpentSeconds: " + Utils.ConvertSecondsToWorklogFormat(oneWorklog.timeSpentSeconds));
                     Console.WriteLine("| dateStarted: " + string.Format("{0}{1:zz}00", oneWorklog.dateStarted, DateTime.Now));
 
+                    string details = string.Format("{0}: {1}", oneWorklog.key, oneWorklog.comment);
+
                     targetJiraRestApi.AddWorklog(targetTicket,
-                        oneWorklog.key,
+                        details,
                         Utils.ConvertSecondsToWorklogFormat(oneWorklog.timeSpentSeconds),
                         string.Format("{0}{1:zz}00", oneWorklog.dateStarted, DateTime.Now)                      
                     );
