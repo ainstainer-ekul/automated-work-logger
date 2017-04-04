@@ -1,0 +1,8 @@
+﻿DC-1502 - 15m - ticket verification
+---
+DC-2500 - 30m - automation testings
+---
+DC-567 - 2h - New added tickets: 
+https://uni4ind.atlassian.net/browse/DC-567
+https://uni4ind.atlassian.net/browse/DC-789
+

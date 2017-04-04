@@ -1,4 +1,5 @@
-﻿using ConsoleApplication1.api.objects;
+﻿using AWLconsole;
+using ConsoleApplication1.api.objects;
 using ConsoleApplication1.University4Industry_UI_Testing.utils;
 using RestSharp;
 using RestSharp.Authenticators;
@@ -26,7 +27,9 @@ namespace ConsoleApplication1
 
         private static JiraRestApi ainJiraRestApi;
         private static JiraRestApi u4iJiraRestApi;
-        
+
+        public static object LocalLogger { get; private set; }
+
         static void Main(string[] args)
         {
                 restClientsInit();
@@ -34,46 +37,63 @@ namespace ConsoleApplication1
                 while (true)
                 {
                     Console.WriteLine("Enter 'exit' to exit");
+                    Console.WriteLine("Enter 'cplogs' to copy from 'daily_logs_list.txt' file");
                     Console.WriteLine("Enter a specific period in YYYY-MM-D:YYYY-MM-D format " +
                                       "to copy worklogs:");
 
                     command = Utils.GetConsoleValue();
-                    if (Utils.IsDateFormatCorrect(command))
-                    {
-                        string[] dateItems = command.Split(':');
+                if (Utils.IsDateFormatCorrect(command))
+                {
+                    string[] dateItems = command.Split(':');
 
-                        switch (Utils.CompareTwoDates(dateItems[0], dateItems[1]))
-                        {
-                            case 0:
-                            case -1:
-                                Console.WriteLine("Copying...");
-                                Console.WriteLine(" ");
-                                Dictionary<string, List<Worklog>> worklogsListForPeriod =
-                                    u4iJiraRestApi.GetWorklogsListForPeriod(dateItems[0], dateItems[1]);
-                                foreach (KeyValuePair<string, List<Worklog>> listlogsForOneDay in worklogsListForPeriod)
-                                {
-                                    JiraRestApi.CopyWorkLogs(listlogsForOneDay.Value, ainJiraRestApi, TARGET_TICKET);
-                                }
-                                Console.WriteLine(
-                                    String.Format("Copying successfully completed! (for '{0}' - '{1}' dates)",
-                                        dateItems[0], dateItems[1]));
-                                break;
+                    switch (Utils.CompareTwoDates(dateItems[0], dateItems[1]))
+                    {
+                        case 0:
+                        case -1:
+                            Console.WriteLine("Copying...");
+                            Console.WriteLine(" ");
+                            Dictionary<string, List<Worklog>> worklogsListForPeriod =
+                                u4iJiraRestApi.GetWorklogsListForPeriod(dateItems[0], dateItems[1]);
+                            foreach (KeyValuePair<string, List<Worklog>> listlogsForOneDay in worklogsListForPeriod)
+                            {
+                                JiraRestApi.CopyWorkLogs(listlogsForOneDay.Value, ainJiraRestApi, TARGET_TICKET);
+                            }
+                            Console.WriteLine(
+                                String.Format("Copying successfully completed! (for '{0}' - '{1}' dates)",
+                                    dateItems[0], dateItems[1]));
+                            break;
 
-                            default:
-                                Console.WriteLine("'{0}' {1} '{2}'. Worklogs were not copied!", dateItems[0],
-                                    "is later than", dateItems[1]);
-                                break;
-                        }
+                        default:
+                            Console.WriteLine("'{0}' {1} '{2}'. Worklogs were not copied!", dateItems[0],
+                                "is later than", dateItems[1]);
+                            break;
                     }
-                    else if (command.Equals("exit"))
-                    {
-                        break;
+                }
+                else if (command.Equals("exit"))
+                {
+                    break;
+                }
+                else if (command.Equals("cplogs"))
+                {
+                    foreach (Worklog worklog in FileLogger.GetLogsFromFile()) {
+                      //  worklog.dateStarted = string.Format("{0}{1:zz}00", DateTime.Now);
+
+                        Console.WriteLine(worklog.key);
+
+                        Console.WriteLine(worklog.timeSpeendString);
+
+                        Console.WriteLine(worklog.comment);
+
+                        // u4iJiraRestApi.AddWorklog(worklog.key, worklog.comment, worklog.timeSpeendInString, worklog.dateStarted);
                     }
-                    else
-                    {
-                        Console.WriteLine(String.Format("'{0}' - unsupported command", command));
-                    }
-                    Console.ReadKey();
+
+
+                }
+                else
+                {
+                    Console.WriteLine(String.Format("'{0}' - unsupported command", command));
+                }
+                Console.ReadKey();
                 }
          }
 

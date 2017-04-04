@@ -12,5 +12,6 @@ namespace ConsoleApplication1.api.objects
         public String comment;
         public int timeSpentSeconds;
         public String dateStarted;
+        public String timeSpeendString;
     }
 }

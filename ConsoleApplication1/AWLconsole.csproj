@@ -51,6 +51,7 @@
     <Compile Include="api\objects\LoggedInUserRootObject.cs" />
     <Compile Include="api\objects\Worklog.cs" />
     <Compile Include="api\objects\WorklogRootObject.cs" />
+    <Compile Include="FileLogger.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="JiraWorkLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,7 +63,9 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="daily_logs_list.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
