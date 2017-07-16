@@ -33,8 +33,9 @@ namespace ConsoleApplication1
                 string command = "";
                 while (true)
                 {
-                    Console.WriteLine("Enter 'exit' to exit");
-                    Console.WriteLine("Enter a specific period in YYYY-MM-D:YYYY-MM-D format " +
+                    Console.WriteLine("- Enter 'exit' to exit");
+                    Console.WriteLine("- Enter 'addlogs' to copy logs from .txt file to client's Jira");
+                    Console.WriteLine("- Enter a specific period in YYYY-MM-D:YYYY-MM-D format " +
                                       "to copy worklogs:");
 
                     command = Utils.GetConsoleValue();
@@ -69,7 +70,20 @@ namespace ConsoleApplication1
                     {
                         break;
                     }
-                    else
+                    else if (command.Equals("addlogs"))
+                    {
+                        foreach (var worklog in Utils.GetWorkloglistFromTxtFile())
+                        {
+                            string date = Utils.GetCurrentDateAndTime();
+
+                            u4iJiraRestApi.AddWorklog(worklog.key, worklog.comment, worklog.timeSpentSeconds, date);
+                                Console.WriteLine("| Adding worklog in U4I jira ...: " + worklog.key + " "
+                                    + worklog.timeSpentSeconds + " " + worklog.comment + " " + date);
+                        }
+
+                    Console.WriteLine("*** Worklogs adding is completed ***");
+                }
+                else
                     {
                         Console.WriteLine(String.Format("'{0}' - unsupported command", command));
                     }

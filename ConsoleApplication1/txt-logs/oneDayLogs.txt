@@ -1,0 +1,2 @@
+﻿1. QA-1 - 15m - testLoG_ at25
+2. QA-1 - 15m - testLoG_ at27

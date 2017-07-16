@@ -10,7 +10,7 @@ namespace ConsoleApplication1.api.objects
     { 
         public String key;
         public String comment;
-        public int timeSpentSeconds;
+        public String timeSpentSeconds;
         public String dateStarted;
     }
 }

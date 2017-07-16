@@ -13,3 +13,11 @@ C:\Projects\1stOne\automated-work-logger\automated-work-logger\ConsoleApplicatio
 C:\Projects\1stOne\automated-work-logger\automated-work-logger\ConsoleApplication1\bin\Debug\RestSharp.dll
 C:\Projects\1stOne\automated-work-logger\automated-work-logger\ConsoleApplication1\bin\Debug\RestSharp.xml
 C:\Projects\1stOne\automated-work-logger\automated-work-logger\ConsoleApplication1\obj\Debug\AWLconsole.csprojResolveAssemblyReference.cache
+D:\Repos\1stOne\awl\automated-work-logger\ConsoleApplication1\bin\Debug\AWLconsole.exe.config
+D:\Repos\1stOne\awl\automated-work-logger\ConsoleApplication1\obj\Debug\AWLconsole.exe
+D:\Repos\1stOne\awl\automated-work-logger\ConsoleApplication1\obj\Debug\AWLconsole.pdb
+D:\Repos\1stOne\awl\automated-work-logger\ConsoleApplication1\bin\Debug\AWLconsole.exe
+D:\Repos\1stOne\awl\automated-work-logger\ConsoleApplication1\bin\Debug\AWLconsole.pdb
+D:\Repos\1stOne\awl\automated-work-logger\ConsoleApplication1\bin\Debug\RestSharp.dll
+D:\Repos\1stOne\awl\automated-work-logger\ConsoleApplication1\bin\Debug\RestSharp.xml
+D:\Repos\1stOne\awl\automated-work-logger\ConsoleApplication1\obj\Debug\AWLconsole.csprojResolveAssemblyReference.cache

@@ -59,7 +59,7 @@ namespace ConsoleApplication1
                 {
                     worklog = new Worklog();
                     worklog.key = rootObject.issue.key;
-                    worklog.timeSpentSeconds = rootObject.timeSpentSeconds;
+                    worklog.timeSpentSeconds = rootObject.timeSpentSeconds.ToString();
                     worklog.comment = rootObject.comment;
                     worklog.dateStarted = rootObject.dateStarted;
                     worklogList.Add(worklog);
@@ -80,13 +80,6 @@ namespace ConsoleApplication1
                 return resultLogsDictionary;
             }
 
-            public int GetWorklogsSum(List<Worklog> worklogList) {
-                int dailyWorklogs = 0;
-                foreach (Worklog worklog in worklogList) {
-                    dailyWorklogs += worklog.timeSpentSeconds;
-                }
-                return dailyWorklogs;
-            }
 
             private string GetDailyWorklogsListEntryPoint(string yyyy_MM_dd) {
                 return string.Format("/rest/tempo-timesheets/3/worklogs?dateFrom={0}&dateTo={0}", yyyy_MM_dd);
@@ -127,11 +120,11 @@ namespace ConsoleApplication1
 
                     string details = string.Format("{0}: {1}", oneWorklog.key, oneWorklog.comment);
 
-                    targetJiraRestApi.AddWorklog(targetTicket,
-                        details,
-                        Utils.ConvertSecondsToWorklogFormat(oneWorklog.timeSpentSeconds),
-                        string.Format("{0}{1:zz}00", oneWorklog.dateStarted, DateTime.Now)                      
-                    );
+//                    targetJiraRestApi.AddWorklog(targetTicket,
+//                        details,
+//                        Utils.ConvertSecondsToWorklogFormat(oneWorklog.timeSpentSeconds),
+//                        string.Format("{0}{1:zz}00", oneWorklog.dateStarted, DateTime.Now)                      
+//                    );
 
                     Console.WriteLine("-----------");
                 }
