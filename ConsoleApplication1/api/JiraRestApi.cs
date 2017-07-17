@@ -120,11 +120,11 @@ namespace ConsoleApplication1
 
                     string details = string.Format("{0}: {1}", oneWorklog.key, oneWorklog.comment);
 
-//                    targetJiraRestApi.AddWorklog(targetTicket,
-//                        details,
-//                        Utils.ConvertSecondsToWorklogFormat(oneWorklog.timeSpentSeconds),
-//                        string.Format("{0}{1:zz}00", oneWorklog.dateStarted, DateTime.Now)                      
-//                    );
+                    targetJiraRestApi.AddWorklog(targetTicket,
+                        details,
+                        Utils.ConvertSecondsToWorklogFormat(oneWorklog.timeSpentSeconds),
+                        string.Format("{0}{1:zz}00", oneWorklog.dateStarted, DateTime.Now)                      
+                    );
 
                     Console.WriteLine("-----------");
                 }
